@@ -37,7 +37,9 @@ m = 200
 g = ig.Graph.Erdos_Renyi(n=n, m=m)
 adj_matrix = g.get_adjacency()
 adj_list = defaultdict(list)
-
+for i in range(len(g.vs)):
+    g.vs[i]["id"] = i
+    g.vs[i]["label"] = str(i)
 
 for i in range(100):
     adj_list[i] = []
@@ -56,7 +58,9 @@ print("Adj matrix 5th row: ", adj_matrix[5])
 print("Adj matrix 10th row: ", adj_matrix[10])
 print("Adj list: ", adj_list)
 
-ig.plot(g)
+
+visual_style = {"vertex_label_size": 14}
+ig.plot(g, target='graph.png', **visual_style)
 
 # TASK 2.1
 all_components = []
@@ -93,5 +97,5 @@ rand2 = np.random.randint(1, 100)
 if rand1 == rand2:
     rand2 = np.random.randint(1, 100)
 
-print("Shortest path from ", rand1, "to ", rand2, ": ", shortest_path(adj_list, 1, 2))
+print("Shortest path from ", rand1, "to ", rand2, ": ", shortest_path(adj_list, rand1, rand2))
 
